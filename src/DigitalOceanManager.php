@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\DigitalOcean;
+namespace PowerPBX\DigitalOcean;
 
 use PowerPBX\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
