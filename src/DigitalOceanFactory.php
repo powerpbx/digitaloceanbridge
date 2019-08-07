@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\DigitalOcean;
+namespace PowerPBX\DigitalOcean;
 
 use DigitalOceanV2\DigitalOceanV2;
-use GrahamCampbell\DigitalOcean\Adapters\ConnectionFactory as AdapterFactory;
+use PowerPBX\DigitalOcean\Adapters\ConnectionFactory as AdapterFactory;
 
 /**
  * This is the digitalocean factory class.
