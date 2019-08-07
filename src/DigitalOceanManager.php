@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace GrahamCampbell\DigitalOcean;
 
-use GrahamCampbell\Manager\AbstractManager;
+use PowerPBX\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
 
 /**
