@@ -19,6 +19,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
+use App\Models\RemoteApiToken;
 
 /**
  * This is the digitalocean service provider class.
@@ -44,7 +45,7 @@ class DigitalOceanServiceProvider extends ServiceProvider
      */
     protected function setupConfig()
     {
-        $key = RemoteApiToken::pluck('vultr_key')->first();
+        $key = RemoteApiToken::pluck('do_token')->first();
         
         $source = realpath($raw = __DIR__.'/../config/digitalocean.php') ?: $raw;
 
