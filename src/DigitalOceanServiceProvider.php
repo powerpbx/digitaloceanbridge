@@ -45,11 +45,7 @@ class DigitalOceanServiceProvider extends ServiceProvider
      */
     protected function setupConfig()
     {
-        try {
-            $key = decrypt(RemoteApiToken::pluck('do_token')->first());
-        } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
-            info($e);
-        }
+        $key = decrypt(RemoteApiToken::pluck('do_token')->first());
         
         $source = realpath($raw = __DIR__.'/../config/digitalocean.php') ?: $raw;
 
