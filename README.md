@@ -38,7 +38,14 @@ In root composer.json
 ```bash
 $ composer require guzzlehttp/guzzle
 ```
-This also assumes the table has been created created that stores the api key and encryption/decryption is setup.
+This also assumes you have added an App\Models\RemoteApiToken class with, for example: 
+```
+protected $table = 'remoteapi_access_tokens_keys';
+protected $fillable = [
+	'user_id', 'do_token'
+];
+```
+Depending on what you want to do.  For simplicity if just using DigitalOcean, it's more likely you will add the do_token field to your users table.
 
 Once installed, if you are not using automatic package discovery, then you need to register the `PowerPBX\DigitalOcean\DigitalOceanServiceProvider` service provider in your `config/app.php`.
 
