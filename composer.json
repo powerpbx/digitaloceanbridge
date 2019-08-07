@@ -11,7 +11,7 @@
         {
             "name": "PowerPBX",
             "email": "devops@powerpbx.org"
-        },
+        }
     ],
     "require": {
         "php": "^7.1.3",
