@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace GrahamCampbell\DigitalOcean;
+namespace PowerPBX\DigitalOcean;
 
 use DigitalOceanV2\DigitalOceanV2;
-use GrahamCampbell\DigitalOcean\Adapters\ConnectionFactory as AdapterFactory;
+use PowerPBX\DigitalOcean\Adapters\ConnectionFactory as AdapterFactory;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
@@ -44,6 +44,8 @@ class DigitalOceanServiceProvider extends ServiceProvider
      */
     protected function setupConfig()
     {
+        $key = RemoteApiToken::pluck('vultr_key')->first();
+        
         $source = realpath($raw = __DIR__.'/../config/digitalocean.php') ?: $raw;
 
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
@@ -52,7 +54,16 @@ class DigitalOceanServiceProvider extends ServiceProvider
             $this->app->configure('digitalocean');
         }
 
-        $this->mergeConfigFrom($source, 'digitalocean');
+        //$this->mergeConfigFrom($source, 'digitalocean');
+        
+        $config = $this->app['config']->get('digitalocean', []);
+        if ($key) {
+            $config['connections']['db']['token'] = $key;
+        } else {
+            $config['connections']['db']['token'] = '';
+        }
+        
+        $this->app['config']->set('digitalocean', array_merge(require $source, $config));
     }
 
     /**
