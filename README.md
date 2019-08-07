@@ -28,16 +28,24 @@ You will need to install at least one of the following dependencies for each dri
 
 So, for example, if using the guzzlehttp driver:
 
-```bash
-$ composer require graham-campbell/digitalocean guzzlehttp/guzzle
+In root composer.json
+```json
+"repositories": [
+        { "type":"vcs", "url": "https://github.com/powerpbx/digitaloceanbridge.git" }
+    ],
 ```
 
-Once installed, if you are not using automatic package discovery, then you need to register the `GrahamCampbell\DigitalOcean\DigitalOceanServiceProvider` service provider in your `config/app.php`.
+```bash
+$ composer require guzzlehttp/guzzle
+```
+This also assumes the table has been created created that stores the api key and encryption/decryption is setup.
+
+Once installed, if you are not using automatic package discovery, then you need to register the `PowerPBX\DigitalOcean\DigitalOceanServiceProvider` service provider in your `config/app.php`.
 
 You can also optionally alias our facade:
 
 ```php
-        'DigitalOcean' => GrahamCampbell\DigitalOcean\Facades\DigitalOcean::class,
+        'DigitalOcean' => PowerPBX\DigitalOcean\Facades\DigitalOcean::class,
 ```
 
 
