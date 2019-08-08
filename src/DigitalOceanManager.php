@@ -74,7 +74,7 @@ class DigitalOceanManager extends AbstractManager
     
     protected function getToken() 
     {
-        $tokenName = 'vultr_token';
+        $tokenName = 'do_token';
         $id = auth()->user()->id;
         $collection = RemoteApiToken::where('user_id', $id)->get();
         $array =  $collection->map->only([$tokenName])->first();
