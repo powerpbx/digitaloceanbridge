@@ -19,6 +19,8 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
+use PowerPBX\DigitalOcean\DigitalOceanFactory;
+use PowerPBX\DigitalOcean\DigitalOceanManager;
 
 /**
  * This is the digitalocean service provider class.
