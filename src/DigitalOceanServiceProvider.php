@@ -19,7 +19,6 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Lumen\Application as LumenApplication;
-use App\Models\RemoteApiToken;
 
 /**
  * This is the digitalocean service provider class.
@@ -44,9 +43,7 @@ class DigitalOceanServiceProvider extends ServiceProvider
      * @return void
      */
     protected function setupConfig()
-    {
-        $key = RemoteApiToken::pluck('do_token')->first();
-        
+    {   
         $source = realpath($raw = __DIR__.'/../config/digitalocean.php') ?: $raw;
 
         if ($this->app instanceof LaravelApplication && $this->app->runningInConsole()) {
@@ -55,16 +52,7 @@ class DigitalOceanServiceProvider extends ServiceProvider
             $this->app->configure('digitalocean');
         }
 
-        //$this->mergeConfigFrom($source, 'digitalocean');
-        
-        $config = $this->app['config']->get('digitalocean', []);
-        if ($key) {
-            $config['connections']['db']['token'] = $key;
-        } else {
-            $config['connections']['db']['token'] = '';
-        }
-        
-        $this->app['config']->set('digitalocean', array_merge(require $source, $config));
+        $this->mergeConfigFrom($source, 'digitalocean');
     }
 
     /**
