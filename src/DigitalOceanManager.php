@@ -15,6 +15,7 @@ namespace PowerPBX\DigitalOcean;
 
 use PowerPBX\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
+use App\Models\RemoteApiToken;
 
 /**
  * This is the digitalocean manager class.
@@ -63,7 +64,21 @@ class DigitalOceanManager extends AbstractManager
      */
     protected function createConnection(array $config)
     {
+        $token = $this->getToken();
+        if (!array_key_exists('token', $config)) {
+            $config['token'] = $token;
+        }
+        
         return $this->factory->make($config);
+    }
+    
+    protected function getToken() 
+    {
+        $tokenName = 'vultr_token';
+        $id = auth()->user()->id;
+        $collection = RemoteApiToken::where('user_id', $id)->get();
+        $array =  $collection->map->only([$tokenName])->first();
+        return $array[$tokenName];
     }
 
     /**
