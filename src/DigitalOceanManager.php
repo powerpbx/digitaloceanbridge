@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace PowerPBX\DigitalOcean;
 
-use GrahamCampbell\Manager\AbstractManager;
+use PowerPBX\Manager\AbstractManager;
 use Illuminate\Contracts\Config\Repository;
 use App\Models\RemoteApiToken;
 
